@@ -1,11 +1,23 @@
 <script setup lang="ts">
 // Inspiration Source: https://www.behance.net/gallery/166907697/Sign-InSign-Up-modal-form-Daily-UI-001?tracking_source=project_owner_other_projects
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+
+// State for password visibility
+const showPassword = ref(false);
 
 const router = useRouter();
 
 function returnToHomepage() {
   router.push("/");
+}
+
+function goToSignUp() {
+  router.push("/signup");
+}
+
+function togglePasswordVisibility() {
+  showPassword.value = !showPassword.value;
 }
 </script>
 
@@ -16,7 +28,7 @@ function returnToHomepage() {
   >
     <!-- Return to homepage -->
     <button
-      class="absolute top-5 left-6 font-semibold text-slate-600 transition hover:underline md:left-10"
+      class="absolute top-5 left-10 font-semibold text-slate-600 transition hover:underline"
       @click="returnToHomepage"
     >
       ← Home page
@@ -30,9 +42,7 @@ function returnToHomepage() {
     </h2>
 
     <!-- Form container -->
-    <div
-      class="w-full max-w-md rounded-2xl bg-white px-6 py-10 shadow-xl md:px-16"
-    >
+    <div class="w-full max-w-md rounded-2xl bg-white px-16 py-10 shadow-xl">
       <!-- Welcome message -->
       <div class="mb-8 text-center">
         <h3 class="mb-1 text-2xl font-semibold text-slate-800">
@@ -44,7 +54,7 @@ function returnToHomepage() {
       </div>
 
       <!-- Form -->
-      <form class="mb-6 flex flex-col gap-6">
+      <form class="mb-6 flex flex-col gap-4">
         <!-- Email -->
         <div class="flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="email"
@@ -60,17 +70,36 @@ function returnToHomepage() {
         </div>
 
         <!-- Password -->
-        <div class="flex flex-col gap-2">
+        <div class="mb-4 flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="password"
             >Password</label
           >
-          <input
-            class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
-            type="password"
-            id="password"
-            placeholder="Enter your Password"
-            autocomplete="current-password"
-          />
+          <div class="relative">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              class="w-full rounded-lg border border-slate-300 px-4 py-3 pr-12 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
+              id="password"
+              placeholder="Enter your Password"
+              autocomplete="current-password"
+            />
+            <button
+              type="button"
+              class="absolute top-1/2 right-3 -translate-y-1/2 text-lg text-slate-400 transition hover:text-violet-600"
+              @click="togglePasswordVisibility"
+              tabindex="-1"
+            >
+              <span v-if="showPassword">
+                <img
+                  src="../assets/icons/eye-crossed.svg"
+                  alt="eye off"
+                  class="h-5 w-5"
+                />
+              </span>
+              <span v-else>
+                <img src="../assets/icons/eye.svg" alt="eye" class="h-5 w-5" />
+              </span>
+            </button>
+          </div>
         </div>
 
         <!-- Sign in button -->
@@ -94,7 +123,7 @@ function returnToHomepage() {
         Don't have an account?
         <a
           class="font-semibold text-violet-600 transition hover:underline"
-          href="#"
+          @click="goToSignUp"
         >
           Sign up
         </a>
