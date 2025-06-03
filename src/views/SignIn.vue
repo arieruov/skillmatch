@@ -12,68 +12,93 @@ function returnToHomepage() {
 <template>
   <!-- Screen -->
   <div
-    class="min-h-screen flex justify-center items-center flex-col relative bg-slate-200"
+    class="relative flex min-h-screen flex-col items-center justify-center bg-gradient-to-br from-slate-100 to-slate-300"
   >
     <!-- Return to homepage -->
     <button
-      class="absolute top-5 left-10 hover:cursor-pointer font-semibold"
+      class="absolute top-5 left-6 font-semibold text-slate-600 transition hover:underline md:left-10"
       @click="returnToHomepage"
     >
-      Home page
+      ← Home page
     </button>
+
     <!-- App name -->
-    <h2 class="font-semibold mb-5">Skillmatch</h2>
+    <h2
+      class="mb-8 text-3xl font-bold tracking-tight text-violet-700 drop-shadow"
+    >
+      Skillmatch
+    </h2>
 
     <!-- Form container -->
-    <div class="bg-white py-8 px-16 rounded-2xl">
+    <div
+      class="w-full max-w-md rounded-2xl bg-white px-6 py-10 shadow-xl md:px-16"
+    >
       <!-- Welcome message -->
-      <div class="text-center mb-6">
-        <h3 class="font-semibold">Welcome Back!</h3>
-        <p class="font-light">
+      <div class="mb-8 text-center">
+        <h3 class="mb-1 text-2xl font-semibold text-slate-800">
+          Welcome Back!
+        </h3>
+        <p class="font-light text-slate-500">
           We missed you! Please enter your account details.
         </p>
       </div>
 
-      <!-- Inputs container -->
-      <div class="flex flex-col gap-4 mb-6">
-        <!-- Inputs -->
-        <div class="flex flex-col gap-1">
-          <label class="px-4" for="email">Email</label>
+      <!-- Form -->
+      <form class="mb-6 flex flex-col gap-6">
+        <!-- Email -->
+        <div class="flex flex-col gap-2">
+          <label class="px-1 font-medium text-slate-700" for="email"
+            >Email</label
+          >
           <input
-            class="px-4 py-2 border-1 rounded-lg"
+            class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
             type="email"
             id="email"
             placeholder="Enter your Email"
+            autocomplete="email"
           />
         </div>
 
-        <div class="flex flex-col gap-1">
-          <label class="px-4" for="password">Password</label>
+        <!-- Password -->
+        <div class="flex flex-col gap-2">
+          <label class="px-1 font-medium text-slate-700" for="password"
+            >Password</label
+          >
           <input
-            class="px-4 py-2 border-1 rounded-lg"
+            class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
             type="password"
             id="password"
             placeholder="Enter your Password"
+            autocomplete="current-password"
           />
         </div>
-      </div>
 
-      <!-- Sign in button -->
-      <div class="flex flex-col gap-4">
+        <!-- Sign in button -->
         <button
-          class="bg-violet-500 text-white font-semibold hover:cursor-pointer py-2 rounded-lg"
+          type="submit"
+          class="rounded-lg bg-violet-600 py-3 font-semibold text-white shadow transition hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
         >
           Sign in
         </button>
-        <p class="text-center">
-          Don't have an account?
-          <a class="text-violet-500 font-semibold hover:cursor-pointer"
-            >Sign up</a
-          >
-        </p>
+      </form>
+
+      <!-- Divider -->
+      <div class="mb-4 flex items-center gap-2">
+        <div class="h-px flex-1 bg-slate-200"></div>
+        <span class="text-xs text-slate-400">or</span>
+        <div class="h-px flex-1 bg-slate-200"></div>
       </div>
+
+      <!-- Sign Up link -->
+      <p class="text-center text-slate-600">
+        Don't have an account?
+        <a
+          class="font-semibold text-violet-600 transition hover:underline"
+          href="#"
+        >
+          Sign up
+        </a>
+      </p>
     </div>
   </div>
 </template>
-
-<style lang="css" scoped></style>
