@@ -2,6 +2,7 @@
 // Inspiration Source: https://www.behance.net/gallery/166907697/Sign-InSign-Up-modal-form-Daily-UI-001?tracking_source=project_owner_other_projects
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import { EyeClosed, Eye } from "lucide-vue-next";
 
 // State for password visibility
 const showPassword = ref(false);
@@ -40,11 +41,7 @@ function togglePasswordConfirmVisibility() {
     </button>
 
     <!-- App name -->
-    <h2
-      class="mb-8 text-3xl font-bold tracking-tight text-violet-700 drop-shadow"
-    >
-      Skillmatch
-    </h2>
+    <h2 class="mb-8 text-3xl font-bold text-violet-700">Skillmatch</h2>
 
     <!-- Form container -->
     <div class="w-full max-w-md rounded-2xl bg-white px-16 py-10 shadow-xl">
@@ -107,14 +104,10 @@ function togglePasswordConfirmVisibility() {
               tabindex="-1"
             >
               <span v-if="showPassword">
-                <img
-                  src="../assets/icons/eye-crossed.svg"
-                  alt="eye off"
-                  class="h-5 w-5"
-                />
+                <EyeClosed />
               </span>
               <span v-else>
-                <img src="../assets/icons/eye.svg" alt="eye" class="h-5 w-5" />
+                <Eye />
               </span>
             </button>
           </div>
@@ -140,14 +133,10 @@ function togglePasswordConfirmVisibility() {
               tabindex="-1"
             >
               <span v-if="showPasswordConfirm">
-                <img
-                  src="../assets/icons/eye-crossed.svg"
-                  alt="eye off"
-                  class="h-5 w-5"
-                />
+                <EyeClosed />
               </span>
               <span v-else>
-                <img src="../assets/icons/eye.svg" alt="eye" class="h-5 w-5" />
+                <Eye />
               </span>
             </button>
           </div>
@@ -156,7 +145,7 @@ function togglePasswordConfirmVisibility() {
         <!-- Sign in button -->
         <button
           type="submit"
-          class="rounded-lg bg-violet-600 py-3 font-semibold text-white shadow transition hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
+          class="rounded-lg bg-violet-600 py-2 font-semibold text-white shadow transition hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
         >
           Sign up
         </button>
