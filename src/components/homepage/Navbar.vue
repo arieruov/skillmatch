@@ -18,7 +18,7 @@ function goToSignUp() {
     <div class="flex gap-4">
       <button
         @click="goToSignIn"
-        class="rounded-lg border-2 border-violet-600 bg-white px-4 py-2 font-semibold text-violet-700 shadow transition hover:cursor-pointer hover:bg-violet-50 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-100"
+        class="rounded-lg border-2 border-violet-600 bg-white px-4 py-2 font-semibold text-violet-600 shadow transition hover:cursor-pointer hover:bg-violet-50 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-100"
       >
         Sign In
       </button>

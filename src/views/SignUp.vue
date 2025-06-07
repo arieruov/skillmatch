@@ -104,10 +104,10 @@ function togglePasswordConfirmVisibility() {
               tabindex="-1"
             >
               <span v-if="showPassword">
-                <EyeClosed />
+                <Eye />
               </span>
               <span v-else>
-                <Eye />
+                <EyeClosed />
               </span>
             </button>
           </div>
@@ -133,10 +133,10 @@ function togglePasswordConfirmVisibility() {
               tabindex="-1"
             >
               <span v-if="showPasswordConfirm">
-                <EyeClosed />
+                <Eye />
               </span>
               <span v-else>
-                <Eye />
+                <EyeClosed />
               </span>
             </button>
           </div>
