@@ -14,7 +14,7 @@ const skills = [
 </script>
 
 <template>
-  <section class="bg-slate-400 px-8 py-20">
+  <section class="bg-gray-100 px-8 py-20">
     <div className="max-w-7xl mx-auto text-center">
       <h2 className="text-6xl font-bold text-slate-900 mb-6">
         Encuentra el trabajo perfecto
