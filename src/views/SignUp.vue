@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Inspiration Source: https://www.behance.net/gallery/166907697/Sign-InSign-Up-modal-form-Daily-UI-001?tracking_source=project_owner_other_projects
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { EyeClosed, Eye } from "lucide-vue-next";
@@ -16,6 +15,10 @@ function returnToHomepage() {
 
 function goToSignin() {
   router.push("/signin");
+}
+
+function goToApp() {
+  router.push("/app");
 }
 
 function togglePasswordVisibility() {
@@ -146,6 +149,7 @@ function togglePasswordConfirmVisibility() {
         <button
           type="submit"
           class="rounded-lg bg-violet-600 py-2 font-semibold text-white shadow transition hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
+          @click="goToApp"
         >
           Sign up
         </button>

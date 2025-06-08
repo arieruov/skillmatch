@@ -4,7 +4,7 @@ import Navbar from "@/components/homepage/Navbar.vue";
 import Hero from "@/components/homepage/Hero.vue";
 import Features from "@/components/homepage/Features.vue";
 import HowItWorks from "@/components/homepage/HowItWorks.vue";
-import CTA from "@/components/homepage/CTA.vue";
+import CallToAction from "@/components/homepage/CallToAction.vue";
 import Footer from "@/components/homepage/Footer.vue";
 
 const router = useRouter();
@@ -16,7 +16,7 @@ const router = useRouter();
     <Hero />
     <Features />
     <HowItWorks />
-    <CTA />
+    <CallToAction />
     <Footer />
   </div>
 </template>
