@@ -1,12 +1,33 @@
 <script setup lang="ts">
 import { Home, Search, Bookmark, Settings } from "lucide-vue-next";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function goToMainPage() {
+  router.push("/app");
+}
+
+function goToSearch() {
+  router.push("/app/search");
+}
+
+function goToSavedOffers() {
+  router.push("/app/savedoffers");
+}
+
+function goToUserConfig() {
+  router.push("/app/userconfig");
+}
 </script>
 
 <template>
-  <aside class="flex h-full w-72 flex-col bg-slate-100 shadow-lg">
+  <aside
+    class="flex h-full w-72 flex-col border-r border-slate-300 bg-slate-100 shadow-lg"
+  >
     <!-- App name -->
     <div class="px-8 py-6">
-      <h1 class="text-2xl font-bold text-violet-600">Skillmatch</h1>
+      <h2 class="text-2xl font-bold text-violet-600">Skillmatch</h2>
     </div>
 
     <hr class="mx-6 border-t border-slate-300" />
@@ -15,6 +36,7 @@ import { Home, Search, Bookmark, Settings } from "lucide-vue-next";
     <nav class="mt-8 flex flex-col gap-2 px-4">
       <button
         class="group flex w-full items-center gap-4 rounded-md px-4 py-2 text-left transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
+        @click="goToMainPage"
       >
         <Home
           class="h-5 w-5 text-violet-600 transition-transform group-hover:scale-110"
@@ -27,6 +49,7 @@ import { Home, Search, Bookmark, Settings } from "lucide-vue-next";
       </button>
       <button
         class="group flex w-full items-center gap-4 rounded-md px-4 py-2 text-left transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
+        @click="goToSearch"
       >
         <Search
           class="h-5 w-5 text-violet-600 transition-transform group-hover:scale-110"
@@ -39,6 +62,7 @@ import { Home, Search, Bookmark, Settings } from "lucide-vue-next";
       </button>
       <button
         class="group flex w-full items-center gap-4 rounded-md px-4 py-2 text-left transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
+        @click="goToSavedOffers"
       >
         <Bookmark
           class="h-5 w-5 text-violet-600 transition-transform group-hover:scale-110"
@@ -55,6 +79,7 @@ import { Home, Search, Bookmark, Settings } from "lucide-vue-next";
     <div class="mt-auto px-4 pb-8">
       <button
         class="group flex w-full items-center gap-4 rounded-md px-4 py-3 transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
+        @click="goToUserConfig"
       >
         <div
           class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-violet-600 text-lg font-bold text-white shadow"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { EyeClosed, Eye } from "lucide-vue-next";
+import { EyeClosed, Eye, ArrowLeft } from "lucide-vue-next";
 
 // State for password visibility
 const showPassword = ref(false);
@@ -37,10 +37,11 @@ function togglePasswordConfirmVisibility() {
   >
     <!-- Return to homepage -->
     <button
-      class="absolute top-5 left-10 font-semibold text-slate-600 transition hover:underline"
+      class="absolute top-5 left-10 flex items-center gap-2 font-semibold text-slate-600 transition hover:cursor-pointer hover:underline"
       @click="returnToHomepage"
     >
-      ← Home page
+      <ArrowLeft class="h-5 w-5" />
+      <p>Homepage</p>
     </button>
 
     <!-- App name -->
@@ -50,11 +51,9 @@ function togglePasswordConfirmVisibility() {
     <div class="w-full max-w-md rounded-2xl bg-white px-16 py-10 shadow-xl">
       <!-- Welcome message -->
       <div class="mb-8 text-center">
-        <h3 class="mb-1 text-2xl font-semibold text-slate-800">
-          Create Account
-        </h3>
+        <h3 class="mb-1 text-2xl font-semibold text-slate-800">Crear Cuenta</h3>
         <p class="font-light text-slate-500">
-          Join us today! Please fill in your details to create an account.
+          ¡Únete hoy! Por favor completa tus datos para crear una cuenta.
         </p>
       </div>
 
@@ -63,26 +62,26 @@ function togglePasswordConfirmVisibility() {
         <!-- Username -->
         <div class="flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="username"
-            >Username</label
+            >Nombre de Usuario</label
           >
           <input
             class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
             type="text"
             id="username"
-            placeholder="Enter your Username"
+            placeholder="Ingresa tu nombre de usuario"
           />
         </div>
 
         <!-- Email -->
         <div class="flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="email"
-            >Email</label
+            >Correo</label
           >
           <input
             class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
             type="email"
             id="email"
-            placeholder="Enter your Email"
+            placeholder="Ingresa tu correo"
             autocomplete="email"
           />
         </div>
@@ -90,19 +89,19 @@ function togglePasswordConfirmVisibility() {
         <!-- Password -->
         <div class="flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="password"
-            >Password</label
+            >Contraseña</label
           >
           <div class="relative">
             <input
               :type="showPassword ? 'text' : 'password'"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 pr-12 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
               id="password"
-              placeholder="Enter your Password"
+              placeholder="Ingresa tu contraseña"
               autocomplete="current-password"
             />
             <button
               type="button"
-              class="absolute top-1/2 right-3 -translate-y-1/2 text-lg text-slate-400 transition hover:text-violet-600"
+              class="absolute top-0 right-3 bottom-0 text-lg text-slate-400 transition hover:cursor-pointer hover:text-violet-600"
               @click="togglePasswordVisibility"
               tabindex="-1"
             >
@@ -119,19 +118,19 @@ function togglePasswordConfirmVisibility() {
         <!-- Password Confirmation -->
         <div class="mb-4 flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="password"
-            >Confirm Password</label
+            >Confirmar Contraseña</label
           >
           <div class="relative">
             <input
               :type="showPasswordConfirm ? 'text' : 'password'"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 pr-12 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
               id="password"
-              placeholder="Enter your Password"
+              placeholder="Ingresa tu contraseña"
               autocomplete="current-password"
             />
             <button
               type="button"
-              class="absolute top-1/2 right-3 -translate-y-1/2 text-lg text-slate-400 transition hover:text-violet-600"
+              class="absolute top-0 right-3 bottom-0 text-lg text-slate-400 transition hover:cursor-pointer hover:text-violet-600"
               @click="togglePasswordConfirmVisibility"
               tabindex="-1"
             >
@@ -151,7 +150,7 @@ function togglePasswordConfirmVisibility() {
           class="rounded-lg bg-violet-600 py-2 font-semibold text-white shadow transition hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
           @click="goToApp"
         >
-          Sign up
+          Registrar
         </button>
       </form>
 
@@ -164,12 +163,12 @@ function togglePasswordConfirmVisibility() {
 
       <!-- Sign Up link -->
       <p class="text-center text-slate-600">
-        Already have an account?
+        Ya tienes una cuenta?
         <a
-          class="font-semibold text-violet-600 transition hover:underline"
+          class="font-semibold text-violet-600 transition hover:cursor-pointer hover:underline"
           @click="goToSignin"
         >
-          Sign in
+          Acceder
         </a>
       </p>
     </div>

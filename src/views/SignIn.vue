@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { EyeClosed, Eye } from "lucide-vue-next";
+import { EyeClosed, Eye, ArrowLeft } from "lucide-vue-next";
 
 // State for password visibility
 const showPassword = ref(false);
@@ -32,10 +32,11 @@ function togglePasswordVisibility() {
   >
     <!-- Return to homepage -->
     <button
-      class="absolute top-5 left-10 font-semibold text-slate-600 transition hover:underline"
+      class="absolute top-5 left-10 flex items-center gap-2 font-semibold text-slate-600 transition hover:cursor-pointer hover:underline"
       @click="returnToHomepage"
     >
-      ← Home page
+      <ArrowLeft class="h-5 w-5" />
+      <p>Homepage</p>
     </button>
 
     <!-- App name -->
@@ -46,10 +47,10 @@ function togglePasswordVisibility() {
       <!-- Welcome message -->
       <div class="mb-8 text-center">
         <h3 class="mb-1 text-2xl font-semibold text-slate-800">
-          Welcome Back!
+          ¡Bienvenido de nuevo!
         </h3>
         <p class="font-light text-slate-500">
-          We missed you! Please enter your account details.
+          ¡Te extrañamos! Por favor ingresa los datos de tu cuenta.
         </p>
       </div>
 
@@ -58,13 +59,13 @@ function togglePasswordVisibility() {
         <!-- Email -->
         <div class="flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="email"
-            >Email</label
+            >Correo</label
           >
           <input
             class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
             type="email"
             id="email"
-            placeholder="Enter your Email"
+            placeholder="Ingresa tu correo"
             autocomplete="email"
           />
         </div>
@@ -72,19 +73,19 @@ function togglePasswordVisibility() {
         <!-- Password -->
         <div class="mb-4 flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="password"
-            >Password</label
+            >Contraseña</label
           >
           <div class="relative">
             <input
               :type="showPassword ? 'text' : 'password'"
               class="w-full rounded-lg border border-slate-300 px-4 py-3 pr-12 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
               id="password"
-              placeholder="Enter your Password"
+              placeholder="Ingresa tu contraseña"
               autocomplete="current-password"
             />
             <button
               type="button"
-              class="absolute top-1/2 right-3 -translate-y-1/2 text-lg text-slate-400 transition hover:text-violet-600"
+              class="absolute top-0 right-3 bottom-0 text-lg text-slate-400 transition hover:cursor-pointer hover:text-violet-600"
               @click="togglePasswordVisibility"
               tabindex="-1"
             >
@@ -104,7 +105,7 @@ function togglePasswordVisibility() {
           class="rounded-lg bg-violet-600 py-2 font-semibold text-white shadow transition hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
           @click="goToApp"
         >
-          Sign in
+          Acceder
         </button>
       </form>
 
@@ -117,12 +118,12 @@ function togglePasswordVisibility() {
 
       <!-- Sign Up link -->
       <p class="text-center text-slate-600">
-        Don't have an account?
+        No tienes una cuenta?
         <a
-          class="font-semibold text-violet-600 transition hover:underline"
+          class="font-semibold text-violet-600 transition hover:cursor-pointer hover:underline"
           @click="goToSignUp"
         >
-          Sign up
+          Registrate
         </a>
       </p>
     </div>
