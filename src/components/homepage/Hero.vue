@@ -31,12 +31,12 @@ const skills = [
         <div className="flex gap-4 p-2 bg-white rounded-lg shadow-lg">
           <div class="relative flex-1">
             <Search
-              class="pointer-events-none absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-gray-400"
+              class="pointer-events-none absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 text-slate-400"
             />
             <input
               type="text"
               placeholder="¿Qué habilidades tienes? (ej: Excel, Python, Marketing...)"
-              class="w-full rounded-md border border-gray-200 bg-gray-50 py-3 pr-4 pl-10 text-gray-700 transition focus:ring-2 focus:ring-violet-400 focus:outline-none"
+              class="w-full rounded-md border border-gray-200 bg-gray-50 py-3 pr-4 pl-10 text-slate-700 transition focus:ring-2 focus:ring-violet-400 focus:outline-none"
             />
           </div>
           <button

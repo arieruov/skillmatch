@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function signOut() {
+  router.push("/");
+}
+</script>
+
 <template>
   <main class="flex flex-1 flex-col px-8 py-6">
     <div class="mb-8">
@@ -97,6 +107,15 @@
       >
         Cancelar
       </button>
+
+      <div class="flex flex-1 justify-end">
+        <button
+          class="flex items-center justify-center rounded-md bg-red-600 px-4 py-2 font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-red-700 focus:ring-2 focus:ring-red-400 focus:ring-offset-2 focus:outline-none"
+          @click="signOut"
+        >
+          Cerrar Sesión
+        </button>
+      </div>
     </div>
   </main>
 </template>

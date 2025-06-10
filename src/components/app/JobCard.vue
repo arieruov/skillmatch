@@ -21,7 +21,7 @@ function toggleFavorite() {
 
 <template>
   <section
-    class="relative flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm"
+    class="relative flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm transition hover:scale-[101%] hover:cursor-pointer hover:shadow-lg"
   >
     <h2 class="mb-2 text-xl font-bold text-slate-900">Empleo</h2>
 
