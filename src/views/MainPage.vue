@@ -11,22 +11,27 @@ import JobCard from "@/components/app/JobCard.vue";
       </p>
     </div>
     <section class="flex flex-col gap-4">
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
+      <JobCard
+        name="Empleo"
+        company="Compañia"
+        location="Gyadalajara, Jalisco, Mexico"
+        date="01/01/2025"
+        salary="15,000 MXN"
+        shift="Tiempo completo"
+        modality="Remoto"
+        experience="Sin experiencia"
+        description="Descripcion de la oferta"
+        :skills="[
+          'Excel',
+          'Python',
+          'Marketing Digital',
+          'Diseño Gráfico',
+          'SQL',
+          'React',
+          'Ventas',
+          'Contabilidad',
+        ]"
+      />
     </section>
   </main>
 </template>
-
-Búsqueda por Habilidades
-
-Encuentra ofertas que coincidan con tus habilidades 

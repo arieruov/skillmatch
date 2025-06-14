@@ -35,18 +35,27 @@ import JobCard from "@/components/app/JobCard.vue";
     </div>
 
     <section class="flex flex-col gap-4">
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
-      <JobCard />
+      <JobCard
+        name="Empleo"
+        company="Compañia"
+        location="Mexico"
+        date="Today"
+        salary="15,000 MXN"
+        shift="Tiempo completo"
+        modality="Remoto"
+        experience="Sin experiencia"
+        description="lorem ipsum"
+        :skills="[
+          'Excel',
+          'Python',
+          'Marketing Digital',
+          'Diseño Gráfico',
+          'SQL',
+          'React',
+          'Ventas',
+          'Contabilidad',
+        ]"
+      />
     </section>
   </main>
 </template>
