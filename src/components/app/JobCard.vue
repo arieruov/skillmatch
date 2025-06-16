@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { Building2, MapPin, Clock, DollarSign, Heart } from "lucide-vue-next";
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
+const favorite = ref(false);
 const props = defineProps<{
   name?: string;
   company?: string;
@@ -15,7 +18,9 @@ const props = defineProps<{
   skills?: string[];
 }>();
 
-const favorite = ref(false);
+function goToJob() {
+  router.push(`/app/jobdetails/${props.name}`);
+}
 
 function toggleFavorite() {
   favorite.value = !favorite.value;
@@ -25,6 +30,7 @@ function toggleFavorite() {
 <template>
   <section
     class="relative flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm transition hover:scale-[101%] hover:cursor-pointer hover:shadow-lg"
+    @click="goToJob"
   >
     <h2 class="mb-2 text-xl font-bold text-slate-900">{{ props.name }}</h2>
 
