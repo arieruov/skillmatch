@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { Search } from "lucide-vue-next";
+import ScreenLayout from "@/components/layout/ScreenLayout.vue";
+import SectionGroup from "@/components/layout/SectionGroup.vue";
 import JobCard from "@/components/app/JobCard.vue";
+import { Search } from "lucide-vue-next";
 </script>
 
 <template>
-  <main class="flex flex-1 flex-col overflow-scroll px-8 py-6">
+  <ScreenLayout>
     <div class="mb-8">
       <h1 className="text-3xl font-bold mb-2">Búsqueda por Habilidades</h1>
       <p className="text-slate-600">
@@ -34,7 +36,7 @@ import JobCard from "@/components/app/JobCard.vue";
       </div>
     </div>
 
-    <section class="flex flex-col gap-4">
+    <SectionGroup>
       <JobCard
         name="Empleo"
         company="Compañia"
@@ -56,6 +58,6 @@ import JobCard from "@/components/app/JobCard.vue";
           'Contabilidad',
         ]"
       />
-    </section>
-  </main>
+    </SectionGroup>
+  </ScreenLayout>
 </template>

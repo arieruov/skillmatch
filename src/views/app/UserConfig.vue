@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ScreenLayout from "@/components/layout/ScreenLayout.vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
@@ -9,7 +10,7 @@ function signOut() {
 </script>
 
 <template>
-  <main class="flex flex-1 flex-col overflow-scroll px-8 py-6">
+  <ScreenLayout>
     <div class="mb-8">
       <h1 className="text-3xl font-bold text-slate-900 mb-2">
         Configuración de Cuenta
@@ -51,49 +52,7 @@ function signOut() {
       </div>
     </section>
 
-    <!-- Preferences Section -->
-    <section
-      class="mb-8 flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm"
-    >
-      <h2 class="mb-6 text-2xl font-bold text-slate-900">
-        Preferencias de Búsqueda
-      </h2>
-      <div class="flex flex-col gap-4">
-        <div class="flex flex-col gap-2">
-          <label class="px-1 font-medium text-slate-700" for="location"
-            >Ubicación preferida</label
-          >
-          <input
-            class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
-            type="text"
-            id="location"
-            placeholder="Guadalajara, Jalisco"
-          />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label class="px-1 font-medium text-slate-700" for="pay"
-            >Salario mínimo</label
-          >
-          <input
-            class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
-            type="text"
-            id="pay"
-            placeholder="MXN 10,000"
-          />
-        </div>
-        <div class="flex flex-col gap-2">
-          <label class="px-1 font-medium text-slate-700" for="type"
-            >Tipo de trabajo</label
-          >
-          <input
-            class="rounded-lg border border-slate-300 px-4 py-3 transition placeholder:text-slate-400 focus:ring-2 focus:ring-violet-400 focus:outline-none"
-            type="text"
-            id="type"
-            placeholder="Tiempo completo"
-          />
-        </div>
-      </div>
-    </section>
+
 
     <!-- Buttons -->
     <div class="flex flex-row gap-4">
@@ -117,5 +76,5 @@ function signOut() {
         </button>
       </div>
     </div>
-  </main>
+  </ScreenLayout>
 </template>

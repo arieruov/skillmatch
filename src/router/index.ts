@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import Homepage from "@/views/Homepage.vue";
 import SignIn from "@/views/access/SignIn.vue";
 import SignUp from "@/views/access/SignUp.vue";
-import App from "@/views/app/App.vue";
+import AppContent from "@/views/app/AppContent.vue";
 import MainPage from "@/views/app/MainPage.vue";
 import Search from "@/views/app/Search.vue";
 import SavedOffers from "@/views/app/SavedOffers.vue";
@@ -16,7 +16,7 @@ const routes = [
   {
     path: "/app",
     name: "app",
-    component: App,
+    component: AppContent,
     children: [
       {
         path: "",
