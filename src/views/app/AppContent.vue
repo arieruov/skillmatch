@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from "vue-router";
-import Sidebar from "@/components/app/Sidebar.vue";
+import Sidebar from "@/components/views/app-content/Sidebar.vue";
 import { onMounted } from "vue";
 
 const router = useRouter();

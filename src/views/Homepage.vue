@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import { useRouter } from "vue-router";
-import Navbar from "@/components/homepage/Navbar.vue";
-import Hero from "@/components/homepage/Hero.vue";
-import Features from "@/components/homepage/Features.vue";
-import HowItWorks from "@/components/homepage/HowItWorks.vue";
-import CallToAction from "@/components/homepage/CallToAction.vue";
-import Footer from "@/components/homepage/Footer.vue";
-
-const router = useRouter();
+import Navbar from "@/components/views/homepage/Navbar.vue";
+import Hero from "@/components/views/homepage/Hero.vue";
+import Features from "@/components/views/homepage/Features.vue";
+import HowItWorks from "@/components/views/homepage/HowItWorks.vue";
+import CallToAction from "@/components/views/homepage/CallToAction.vue";
+import Footer from "@/components/views/homepage/Footer.vue";
 </script>
 
 <template>

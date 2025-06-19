@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import SidebarButton from "../buttons/SidebarButton.vue";
-import UserConfigButton from "../buttons/UserConfigButton.vue";
+import SidebarButton from "../../ui/buttons/SidebarButton.vue";
+import UserConfigButton from "../../ui/buttons/UserConfigButton.vue";
 
 const userString = localStorage.getItem("user");
 const user = userString ? JSON.parse(userString) : null;

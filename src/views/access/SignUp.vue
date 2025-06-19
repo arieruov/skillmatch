@@ -3,10 +3,18 @@ import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { EyeClosed, Eye, ArrowLeft, ArrowDown } from "lucide-vue-next";
 
+const router = useRouter();
+
+// Reactive variables for password visibility
 const showPassword = ref(false);
 const showPasswordConfirm = ref(false);
-const accountType = ref("user");
-const router = useRouter();
+
+//  Reactive variables for form inputs
+const username = ref("");
+const email = ref("");
+const password = ref("");
+const passwordConfirm = ref("");
+const accountType = ref("user"); // Default to "user"
 
 // Toggle password visibility functions
 function togglePasswordVisibility() {
@@ -26,15 +34,69 @@ function goToSignin() {
   router.push("/sign-in");
 }
 
-function goToApp() {
-  // Temporal sesion creation
-  localStorage.setItem(
-    "user",
-    JSON.stringify({ username: "testUser", accountType: accountType.value }),
-  );
+// Function to create a new user account
+// This function sends a POST request to the API to create a new user account
+// It validates the form inputs, handles errors, and redirects the user upon success.
+// The API endpoint is assumed to be "http://localhost:3000/register"
+// Adjust the URL as needed based on your backend setup.
+// Use the URL "http://localhost:3000/test-connection" for testing purposes
+function createUser() {
+  const apiUrl = "http://localhost:3000/test-connection";
 
-  // Redirect to the app
-  router.push("/app");
+  // Validate form inputs
+  if (
+    !username.value ||
+    !email.value ||
+    !password.value ||
+    !accountType.value
+  ) {
+    alert("Por favor completa todos los campos.");
+    return;
+  }
+
+  if (password.value !== passwordConfirm.value) {
+    alert("Las contraseñas no coinciden.");
+    return;
+  }
+
+  // Prepare user data
+  const userData = {
+    username: username.value,
+    email: email.value,
+    password: password.value,
+    accountType: accountType.value,
+  };
+
+  // Send POST request to the API
+  fetch(apiUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userData),
+  })
+    .then(async (response) => {
+      const data = await response.json();
+      if (!response.ok) {
+        // Show server-provided error if available
+        const errorMsg = data?.error || data?.message || "Error al crear la cuenta. Por favor intenta de nuevo.";
+        throw new Error(errorMsg);
+      }
+      return data;
+    })
+    .then((data) => {
+      // Handle successful account creation
+      console.log("Cuenta creada exitosamente:", data);
+      alert("Cuenta creada exitosamente. ¡Bienvenido!");
+
+      // Redirect to app page
+      router.push("/app");
+    })
+    .catch((error) => {
+      // Handle errors
+      console.error("Error al crear la cuenta:", error);
+      alert(error.message);
+    });
 }
 </script>
 
@@ -66,7 +128,7 @@ function goToApp() {
       </div>
 
       <!-- Form -->
-      <form class="mb-6 flex flex-col gap-4">
+      <form class="mb-6 flex flex-col gap-4" @submit.prevent="createUser">
         <!-- Username -->
         <div class="flex flex-col gap-2">
           <label class="px-1 font-medium text-slate-700" for="username"
@@ -77,6 +139,8 @@ function goToApp() {
             type="text"
             id="username"
             placeholder="Ingresa tu nombre de usuario"
+            v-model="username"
+            required
           />
         </div>
 
@@ -91,6 +155,8 @@ function goToApp() {
             id="email"
             placeholder="Ingresa tu correo"
             autocomplete="email"
+            v-model="email"
+            required
           />
         </div>
 
@@ -128,6 +194,8 @@ function goToApp() {
               id="password"
               placeholder="Ingresa tu contraseña"
               autocomplete="current-password"
+              v-model="password"
+              required
             />
             <button
               type="button"
@@ -157,6 +225,8 @@ function goToApp() {
               id="password"
               placeholder="Ingresa tu contraseña"
               autocomplete="current-password"
+              v-model="passwordConfirm"
+              required
             />
             <button
               type="button"
@@ -178,7 +248,6 @@ function goToApp() {
         <button
           type="submit"
           class="rounded-lg bg-violet-600 py-2 font-semibold text-white shadow transition hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
-          @click="goToApp"
         >
           Registrar
         </button>
