@@ -31,7 +31,11 @@ const userType = user?.accountType;
       <!-- Conditional Button for Employers -->
       <template v-if="userType === 'enterprise'">
         <!-- Temporal route -->
-        <SidebarButton icon="briefcase" label="Publicar Oferta" route="/app" />
+        <SidebarButton
+          icon="briefcase"
+          label="Publicar Oferta"
+          route="/app/publish-offer"
+        />
       </template>
     </nav>
 

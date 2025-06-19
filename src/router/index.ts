@@ -8,6 +8,7 @@ import Search from "@/views/app/Search.vue";
 import SavedOffers from "@/views/app/SavedOffers.vue";
 import UserConfig from "@/views/app/UserConfig.vue";
 import JobDetails from "@/views/app/JobDetails.vue";
+import PublishOffer from "@/views/app/PublishOffer.vue";
 
 const routes = [
   { path: "/", name: "homepage", component: Homepage },
@@ -15,7 +16,6 @@ const routes = [
   { path: "/sign-up", name: "sign-up", component: SignUp },
   {
     path: "/app",
-    name: "app",
     component: AppContent,
     children: [
       {
@@ -42,6 +42,12 @@ const routes = [
         path: "job-details/:id",
         name: "job-details",
         component: JobDetails,
+        props: true, // Pass route params as props
+      },
+      {
+        path: "publish-offer",
+        name: "publish-offer",
+        component: PublishOffer,
       },
     ],
   },
