@@ -9,7 +9,7 @@ onMounted(() => {
   // Check if user is already logged in
   const user = localStorage.getItem("user");
   if (!user) {
-    router.push("/signin");
+    router.push("/sign-in");
   }
 });
 </script>
