@@ -1,99 +1,46 @@
 <script setup lang="ts">
-import { Home, Search, Bookmark, Settings } from "lucide-vue-next";
-import { useRouter } from "vue-router";
+import SidebarButton from "../buttons/SidebarButton.vue";
+import UserConfigButton from "../buttons/UserConfigButton.vue";
 
-const router = useRouter();
-
-function goToMainPage() {
-  router.push("/app");
-}
-
-function goToSearch() {
-  router.push("/app/search");
-}
-
-function goToSavedOffers() {
-  router.push("/app/savedoffers");
-}
-
-function goToUserConfig() {
-  router.push("/app/userconfig");
-}
+const userString = localStorage.getItem("user");
+const user = userString ? JSON.parse(userString) : null;
+const userType = user?.accountType;
 </script>
 
 <template>
   <aside
     class="flex h-full w-72 flex-col border-r border-slate-300 bg-slate-100 shadow-lg"
   >
-    <!-- App name -->
+    <!-- Logo and Title -->
     <div class="px-8 py-6">
       <h2 class="text-2xl font-bold text-violet-600">Skillmatch</h2>
     </div>
 
     <hr class="mx-6 border-t border-slate-300" />
 
-    <!-- Page Buttons -->
+    <!-- Navigation Buttons -->
     <nav class="mt-8 flex flex-col gap-2 px-4">
-      <button
-        class="group flex w-full items-center gap-4 rounded-md px-4 py-2 text-left transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
-        @click="goToMainPage"
-      >
-        <Home
-          class="h-5 w-5 text-violet-600 transition-transform group-hover:scale-110"
-        />
-        <span
-          class="font-medium text-slate-700 transition-colors group-hover:text-violet-700"
-        >
-          Pagina principal
-        </span>
-      </button>
-      <button
-        class="group flex w-full items-center gap-4 rounded-md px-4 py-2 text-left transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
-        @click="goToSearch"
-      >
-        <Search
-          class="h-5 w-5 text-violet-600 transition-transform group-hover:scale-110"
-        />
-        <span
-          class="font-medium text-slate-700 transition-colors group-hover:text-violet-700"
-        >
-          Busqueda
-        </span>
-      </button>
-      <button
-        class="group flex w-full items-center gap-4 rounded-md px-4 py-2 text-left transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
-        @click="goToSavedOffers"
-      >
-        <Bookmark
-          class="h-5 w-5 text-violet-600 transition-transform group-hover:scale-110"
-        />
-        <span
-          class="font-medium text-slate-700 transition-colors group-hover:text-violet-700"
-        >
-          Ofertas guardadas
-        </span>
-      </button>
+      <SidebarButton icon="home" label="Pagina Principal" route="/app" />
+      <SidebarButton icon="search" label="Buscar Ofertas" route="/app/search" />
+      <SidebarButton
+        icon="bookmark"
+        label="Ofertas Guardadas"
+        route="/app/saved-offers"
+      />
+
+      <!-- Conditional Button for Employers -->
+      <template v-if="userType === 'enterprise'">
+        <!-- Temporal route -->
+        <SidebarButton icon="briefcase" label="Publicar Oferta" route="/app" />
+      </template>
     </nav>
 
-    <!-- Profile Button -->
+    <!-- User Configuration Button -->
     <div class="mt-auto px-4 pb-8">
-      <button
-        class="group flex w-full items-center gap-4 rounded-md px-4 py-3 transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
-        @click="goToUserConfig"
-      >
-        <div
-          class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-violet-400 to-violet-600 text-lg font-bold text-white shadow"
-        >
-          U
-        </div>
-        <div class="flex min-w-0 flex-1 flex-col items-start text-left">
-          <p class="truncate font-semibold text-slate-800">Username</p>
-          <p class="truncate text-xs text-slate-500">username@email.com</p>
-        </div>
-        <Settings
-          class="ml-2 h-5 w-5 text-violet-600 transition-transform group-hover:scale-110"
-        />
-      </button>
+      <UserConfigButton
+        username="Ariel"
+        email="arielornelasfsdfsdfs.v@gmail.com"
+      />
     </div>
   </aside>
 </template>

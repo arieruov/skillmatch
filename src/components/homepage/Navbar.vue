@@ -4,11 +4,11 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 function goToSignIn() {
-  router.push("/signin");
+  router.push("/sign-in");
 }
 
 function goToSignUp() {
-  router.push("/signup");
+  router.push("/sign-up");
 }
 </script>
 

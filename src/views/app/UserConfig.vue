@@ -5,7 +5,11 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 function signOut() {
-  router.push("/");
+  // Clear user session data
+  localStorage.removeItem("user");
+
+  // Redirect to the homepage and reset the router
+  router.replace("/");
 }
 </script>
 
@@ -51,8 +55,6 @@ function signOut() {
         </div>
       </div>
     </section>
-
-
 
     <!-- Buttons -->
     <div class="flex flex-row gap-4">

@@ -1,32 +1,40 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { EyeClosed, Eye, ArrowLeft } from "lucide-vue-next";
+import { EyeClosed, Eye, ArrowLeft, ArrowDown } from "lucide-vue-next";
 
-// State for password visibility
 const showPassword = ref(false);
 const showPasswordConfirm = ref(false);
-
+const accountType = ref("user");
 const router = useRouter();
 
-function returnToHomepage() {
-  router.push("/");
-}
-
-function goToSignin() {
-  router.push("/signin");
-}
-
-function goToApp() {
-  router.push("/app");
-}
-
+// Toggle password visibility functions
 function togglePasswordVisibility() {
   showPassword.value = !showPassword.value;
 }
 
 function togglePasswordConfirmVisibility() {
   showPasswordConfirm.value = !showPasswordConfirm.value;
+}
+
+// Navigation functions
+function returnToHomepage() {
+  router.push("/");
+}
+
+function goToSignin() {
+  router.push("/sign-in");
+}
+
+function goToApp() {
+  // Temporal sesion creation
+  localStorage.setItem(
+    "user",
+    JSON.stringify({ username: "testUser", accountType: accountType.value }),
+  );
+
+  // Redirect to the app
+  router.push("/app");
 }
 </script>
 
@@ -84,6 +92,28 @@ function togglePasswordConfirmVisibility() {
             placeholder="Ingresa tu correo"
             autocomplete="email"
           />
+        </div>
+
+        <!-- Account Type -->
+        <div class="flex flex-col gap-2">
+          <label class="px-1 font-medium text-slate-700" for="account-type"
+            >Tipo de Cuenta</label
+          >
+          <div class="relative">
+            <select
+              class="w-full appearance-none rounded-lg border border-slate-300 px-4 py-3 pr-10 transition placeholder:text-slate-400 hover:cursor-pointer focus:ring-2 focus:ring-violet-400 focus:outline-none"
+              id="account-type"
+              v-model="accountType"
+              required
+            >
+              <option value="" disabled>Seleccionar tipo de cuenta</option>
+              <option value="user">Usuario</option>
+              <option value="enterprise">Empresa</option>
+            </select>
+            <span class="absolute inset-y-0 right-3 flex items-center">
+              <ArrowDown class="h-5 w-5 text-slate-400" />
+            </span>
+          </div>
         </div>
 
         <!-- Password -->

@@ -17,7 +17,7 @@ const props = defineProps<{
 }>();
 
 function goToJob() {
-  router.push(`/app/jobdetails/${props.name}`);
+  router.push(`/app/job-details/${props.name}`);
 }
 </script>
 

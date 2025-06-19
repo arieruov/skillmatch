@@ -10,9 +10,9 @@ import UserConfig from "@/views/app/UserConfig.vue";
 import JobDetails from "@/views/app/JobDetails.vue";
 
 const routes = [
-  { path: "/", name: "home", component: Homepage },
-  { path: "/signin", name: "sign-in", component: SignIn },
-  { path: "/signup", name: "sign-up", component: SignUp },
+  { path: "/", name: "homepage", component: Homepage },
+  { path: "/sign-in", name: "sign-in", component: SignIn },
+  { path: "/sign-up", name: "sign-up", component: SignUp },
   {
     path: "/app",
     name: "app",
@@ -29,17 +29,17 @@ const routes = [
         component: Search,
       },
       {
-        path: "savedoffers",
+        path: "saved-offers",
         name: "saved-offers",
         component: SavedOffers,
       },
       {
-        path: "userconfig",
+        path: "user-config",
         name: "user-config",
         component: UserConfig,
       },
       {
-        path: "/app/jobdetails/:id",
+        path: "job-details/:id",
         name: "job-details",
         component: JobDetails,
       },

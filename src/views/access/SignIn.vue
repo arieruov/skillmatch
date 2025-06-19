@@ -1,28 +1,36 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { EyeClosed, Eye, ArrowLeft } from "lucide-vue-next";
 
-// State for password visibility
 const showPassword = ref(false);
-
 const router = useRouter();
 
+// Toggle password visibility function
+function togglePasswordVisibility() {
+  showPassword.value = !showPassword.value;
+}
+
+// Navigation functions
 function returnToHomepage() {
   router.push("/");
 }
 
 function goToSignUp() {
-  router.push("/signup");
+  router.push("/sign-up");
 }
 
 function goToApp() {
   router.push("/app");
 }
 
-function togglePasswordVisibility() {
-  showPassword.value = !showPassword.value;
-}
+onMounted(() => {
+  // Check if user is already logged in
+  const user = localStorage.getItem("user");
+  if (user) {
+    router.push("/app");
+  }
+});
 </script>
 
 <template>
