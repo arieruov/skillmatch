@@ -4,11 +4,11 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 
 function goToSignIn() {
-  router.push("/sign-in");
+  router.push("/login");
 }
 
 function goToSignUp() {
-  router.push("/sign-up");
+  router.push("/signup");
 }
 </script>
 
@@ -20,13 +20,13 @@ function goToSignUp() {
         @click="goToSignIn"
         class="rounded-lg border-2 border-violet-600 bg-white px-4 py-2 font-semibold text-violet-600 shadow transition hover:cursor-pointer hover:bg-violet-50 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-100"
       >
-        Sign In
+        Iniciar sesión
       </button>
       <button
         @click="goToSignUp"
         class="rounded-lg bg-violet-600 px-4 py-2 font-semibold text-white shadow transition hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
       >
-        Sign Up
+        Registrarse
       </button>
     </div>
   </header>

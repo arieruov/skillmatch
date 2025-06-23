@@ -34,15 +34,18 @@ function goToJob() {
           <Building2 class="h-4 w-4" />
           <p>{{ props.company }}</p>
         </div>
+
         <div class="flex items-center gap-1">
           <MapPin class="h-4 w-4" />
           <p>{{ props.location }}</p>
         </div>
+
         <div class="flex items-center gap-1">
           <Clock class="h-4 w-4" />
           <p>{{ "Publicado el " + props.date }}</p>
         </div>
       </div>
+
       <div className="flex items-center gap-2 text-sm text-slate-600">
         <DollarSign className="h-4 w-4" />
         <p>
@@ -63,6 +66,7 @@ function goToJob() {
       <p class="text-sm whitespace-pre-line text-slate-500">
         {{ props.description }}
       </p>
+
       <div class="flex flex-wrap gap-2">
         <span
           v-for="skill in props.skills"

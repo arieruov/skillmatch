@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from "vue-router";
-import Sidebar from "@/components/views/app-content/Sidebar.vue";
+import Sidebar from "@/components/layout/sidebar/Sidebar.vue";
 import { onMounted } from "vue";
 
 const router = useRouter();
 
-onMounted(() => {
-  // Check if user is already logged in
-  const user = localStorage.getItem("user");
-  if (!user) {
-    router.push("/sign-in");
+onMounted(async () => {
+  const sessionToken = localStorage.getItem("token");
+
+  if (!sessionToken) {
+    router.push("/");
+    return;
   }
 });
 </script>

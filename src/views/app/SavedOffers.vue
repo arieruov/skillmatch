@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ScreenLayout from "@/components/layout/ScreenLayout.vue";
 import SectionGroup from "@/components/layout/SectionGroup.vue";
-import JobCard from "@/components/views/general/JobCard.vue";
+import JobCard from "@/components/common/JobCard.vue";
 </script>
 
 <template>

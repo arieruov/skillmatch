@@ -6,7 +6,7 @@ const router = useRouter();
 
 function signOut() {
   // Clear user session data
-  localStorage.removeItem("user");
+  localStorage.removeItem("token");
 
   // Redirect to the homepage and reset the router
   router.replace("/");
