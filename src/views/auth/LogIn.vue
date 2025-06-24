@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import {
   AppName,
@@ -21,20 +21,17 @@ const router = useRouter();
 async function logIn() {
   const apiUrl = "http://localhost:3000/api/auth/login";
 
-  // Validamos que los inputs no esten vacios
   if (!email.value || !password.value) {
     alert("Por favor completa todos los campos.");
     return;
   }
 
-  // Preparamos los datos del usuario para ser enviados
   const userPayload = {
     email: email.value,
     password: password.value,
   };
 
   try {
-    // Mandamos la peticion con los datos del usuario
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -43,15 +40,11 @@ async function logIn() {
 
     const data = await response.json();
 
-    // En caso de que el servidr nos arrojara un error, arrojamos una excepcion
     if (!response.ok) {
       throw new Error(data.error || "Error al mandar la peticion");
     }
 
-    // Mostramos el mensaje que manda el servidor cuando la peticion se completó exitosamente
-    console.log(data.message);
-
-    // Creamos una sesion para el usuario y la almacenamos en el localStorage
+    // Guardamos el JWT del usuario
     localStorage.setItem("token", data.token);
 
     router.push("/app");
@@ -59,14 +52,6 @@ async function logIn() {
     alert(error);
   }
 }
-
-onMounted(() => {
-  const userSession = localStorage.getItem("token");
-
-  if (userSession) {
-    router.push("/app");
-  }
-});
 </script>
 
 <template>
@@ -97,7 +82,7 @@ onMounted(() => {
           v-model="password"
         />
 
-        <AuthButton text="Iniciar sesión"/>
+        <AuthButton text="Iniciar sesión" />
       </form>
 
       <OrDivider />

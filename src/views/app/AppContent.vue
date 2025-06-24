@@ -1,18 +1,6 @@
 <script setup lang="ts">
-import { RouterView, useRouter } from "vue-router";
+import { RouterView } from "vue-router";
 import Sidebar from "@/components/layout/sidebar/Sidebar.vue";
-import { onMounted } from "vue";
-
-const router = useRouter();
-
-onMounted(async () => {
-  const sessionToken = localStorage.getItem("token");
-
-  if (!sessionToken) {
-    router.push("/");
-    return;
-  }
-});
 </script>
 
 <template>
