@@ -23,7 +23,7 @@ router.beforeEach((to, from, next) => {
     console.log(
       "Tienes un token de sesión, se te redirigira directamente a la ruta /app",
     );
-    return next("/app");
+    return next("/auth-loading");
   }
 
   next();
