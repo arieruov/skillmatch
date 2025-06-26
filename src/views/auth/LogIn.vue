@@ -44,7 +44,6 @@ async function logIn() {
       throw new Error(data.error || "Error al mandar la peticion");
     }
 
-    // Guardamos el JWT del usuario
     localStorage.setItem("token", data.token);
 
     router.push("/app");

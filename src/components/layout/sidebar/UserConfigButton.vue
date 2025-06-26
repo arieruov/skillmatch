@@ -6,10 +6,8 @@ const props = defineProps<{
   username: string;
   email: string;
 }>();
-
 const router = useRouter();
 
-// Function to navigate to user configuration page
 function goToUserConfig() {
   router.push("/app/user-config");
 }

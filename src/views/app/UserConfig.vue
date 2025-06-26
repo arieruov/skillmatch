@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import ScreenLayout from "@/components/layout/ScreenLayout.vue";
+import { useUserStore } from "@/stores/user";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
-function signOut() {
-  // Clear user session data
-  localStorage.removeItem("token");
+const userStore = useUserStore();
 
-  // Redirect to the homepage and reset the router
+function signOut() {
+  localStorage.removeItem("token");
+  userStore.cleanUser();
   router.replace("/");
 }
 </script>

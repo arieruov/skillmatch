@@ -24,9 +24,8 @@ const accountType = ref("user");
 const router = useRouter();
 
 async function createUser() {
-  const apiUrl = "http://192.168.1.226:3000/register";
+  const apiUrl = "http://localhost:3000/api/auth/register";
 
-  // Validamos que los inputs no esten vacios
   if (
     !username.value ||
     !email.value ||
@@ -37,13 +36,11 @@ async function createUser() {
     return;
   }
 
-  // Verificamos que la contraseña coincide
   if (password.value !== confirmPassword.value) {
     alert("Las contraseñas no coinciden.");
     return;
   }
 
-  // Preparamos los datos del usuario para ser enviados
   const userPayload = {
     username: username.value,
     email: email.value,
@@ -52,7 +49,6 @@ async function createUser() {
   };
 
   try {
-    // Mandamos la peticion con los datos del usuario
     const response = await fetch(apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -61,15 +57,10 @@ async function createUser() {
 
     const data = await response.json();
 
-    // En caso de que el servidr nos arrojara un error, arrojamos una excepcion
     if (!response.ok) {
       throw new Error(data.error || "Error al mandar la peticion");
     }
 
-    // Mostramos el mensaje que manda el servidor cuando la peticion se completó exitosamente
-    console.log(data.message);
-
-    // Redirijimos al usuario a la pantalla de ligin para que ingrese sus credenciales
     router.push("/login");
   } catch (error) {
     alert(error);
@@ -127,7 +118,6 @@ async function createUser() {
 
       <OrDivider />
 
-      <!-- Sign Up link -->
       <AuthSwitchPrompt
         message="Ya tienes una cuenta?"
         linkText="Iniciar sesión"

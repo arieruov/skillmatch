@@ -1,10 +1,13 @@
 <script setup lang="ts">
+import { computed } from "vue";
+import { useUserStore } from "@/stores/user";
 import SidebarButton from "./SidebarButton.vue";
 import UserConfigButton from "./UserConfigButton.vue";
 
-const userString = localStorage.getItem("user");
-const user = userString ? JSON.parse(userString) : null;
-const userType = user?.accountType;
+const userStore = useUserStore();
+const accountType = computed(() => userStore.userData?.["account-type"] ?? "");
+const username = computed(() => userStore.userData?.username ?? "");
+const email = computed(() => userStore.userData?.email ?? "");
 </script>
 
 <template>
@@ -26,7 +29,7 @@ const userType = user?.accountType;
         route="/app/saved-offers"
       />
 
-      <template v-if="userType === 'enterprise'">
+      <template v-if="accountType === 'enterprise'">
         <SidebarButton
           icon="briefcase"
           label="Publicar Oferta"
@@ -36,10 +39,7 @@ const userType = user?.accountType;
     </nav>
 
     <div class="mt-auto px-4 pb-8">
-      <UserConfigButton
-        username="Ariel"
-        email="arielornelasfsdfsdfs.v@gmail.com"
-      />
+      <UserConfigButton :username="username" :email="email" />
     </div>
   </aside>
 </template>
