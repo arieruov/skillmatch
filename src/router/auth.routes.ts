@@ -9,11 +9,6 @@ const authRoutes = [
     name: "signup",
     component: () => import("@/views/auth/SignUp.vue"),
   },
-  {
-    path: "/auth-loading",
-    name: "auth-loading",
-    component: () => import("@/views/auth/AuthLoading.vue"),
-  },
 ];
 
 export default authRoutes;

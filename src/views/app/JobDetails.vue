@@ -1,67 +1,134 @@
 <script setup lang="ts">
-import ScreenLayout from "@/components/layout/ScreenLayout.vue";
-import SectionGroup from "@/components/layout/SectionGroup.vue";
-import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { onMounted, ref, computed } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import {
   Building2,
   MapPin,
-  Clock,
   DollarSign,
   Heart,
   ExternalLink,
 } from "lucide-vue-next";
+import ScreenLayout from "@/components/layout/ScreenLayout.vue";
+import SectionGroup from "@/components/layout/SectionGroup.vue";
+import { useUserStore } from "@/stores/user";
 
+interface JobOffer {
+  job_title: string;
+  company: string;
+  location: string;
+  application_url: string;
+  job_type: string;
+  experience: string;
+  work_mode: string;
+  salary: string;
+  skills: string;
+  description: string;
+  about_company: string;
+  responsabilities: string;
+  requirements: string;
+  we_offer: string;
+  user_id: string;
+}
+
+const token = localStorage.getItem("token");
 const route = useRoute();
-const jobName = route.params.id;
+const router = useRouter();
+const userStore = useUserStore();
+const jobId = route.params.id;
 const favorite = ref(false);
-const skills = [
-  "Excel",
-  "Python",
-  "Marketing Digital",
-  "Diseño Gráfico",
-  "SQL",
-  "React",
-  "Ventas",
-  "Contabilidad",
-];
+const jobData = ref<JobOffer | null>(null);
+
+const skills = computed(() =>
+  jobData.value?.skills
+    ? jobData.value?.skills
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
+    : [],
+);
 
 function toggleFavorite() {
   favorite.value = !favorite.value;
 }
+
+onMounted(async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/job/getOffer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        offerId: jobId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(
+        data.error || "/job-details: Error al publicar la oferta",
+      );
+
+      // @ts-ignore
+      error.validToken = data.validToken;
+      throw error;
+    }
+
+    jobData.value = data;
+  } catch (error: any) {
+    if (error.validToken === false) {
+      alert("/publish-offer: Token Invalido");
+      localStorage.removeItem("token");
+      userStore.cleanUser();
+      router.push("/");
+    }
+
+    alert(error.message);
+  }
+});
 </script>
 
 <template>
   <ScreenLayout>
-    <SectionGroup>
-      <!-- Job header -->
+    <SectionGroup v-if="jobData">
       <section
         class="relative flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm"
       >
         <div class="flex justify-between">
           <div>
             <h1 class="mb-4 text-2xl font-bold text-slate-900">
-              {{ jobName }}
+              {{ jobData?.job_title }}
             </h1>
 
             <div class="mb-2 flex items-center gap-4 text-sm text-slate-600">
               <div class="flex items-center gap-1">
                 <Building2 class="h-4 w-4" />
-                <p>Compañia</p>
+                <p>{{ jobData?.company }}</p>
               </div>
+
               <div class="flex items-center gap-1">
                 <MapPin class="h-4 w-4" />
-                <p>Ubicacion</p>
+                <p>{{ jobData?.location }}</p>
               </div>
+
               <div class="flex items-center gap-1">
-                <Clock class="h-4 w-4" />
-                <p>Fecha publicacion</p>
+                <DollarSign class="h-4 w-4" />
+                <p>{{ jobData?.salary }}</p>
               </div>
             </div>
 
             <div className="flex items-center gap-2 text-sm text-slate-600">
-              <DollarSign className="h-4 w-4" />
-              <p>Salario • Horario • Modalidad • Experiencia</p>
+              <p>
+                {{
+                  jobData?.job_type +
+                  " • " +
+                  jobData?.work_mode +
+                  " • " +
+                  jobData?.experience
+                }}
+              </p>
             </div>
           </div>
 
@@ -76,12 +143,15 @@ function toggleFavorite() {
               />
               Guardar
             </button>
-            <button
+
+            <a
               class="flex items-center justify-center gap-2 rounded-md bg-violet-600 px-4 py-2 font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:outline-none"
+              :href="jobData?.application_url"
+              target="_blank"
             >
               <ExternalLink class="h-4 w-4" />
               Ir a la oferta
-            </button>
+            </a>
           </div>
         </div>
       </section>
@@ -90,9 +160,10 @@ function toggleFavorite() {
       <section
         class="relative flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm transition"
       >
-        <h2 class="mb-4 text-xl font-bold text-slate-900">
+        <h2 class="mb-4 text-2xl font-bold text-slate-900">
           Habilidades Requeridas
         </h2>
+
         <div class="flex flex-wrap gap-2">
           <span
             v-for="skill in skills"
@@ -108,40 +179,43 @@ function toggleFavorite() {
       <section
         class="relative flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm transition"
       >
-        <h2 class="mb-4 text-xl font-bold text-slate-900">
-          Descripcion de la oferta
+        <h2 class="mb-4 text-2xl font-bold text-slate-900">
+          Descripción de la oferta
         </h2>
-        <pre class="font-sans whitespace-pre-wrap text-slate-600">
-      Sobre la empresa
-  
-      TechCorp es una empresa líder en desarrollo de software con más de 10 años de experiencia en el mercado. Trabajamos con clientes de todo el mundo creando soluciones innovadoras.
-      Descripción del puesto
-  
-      Estamos buscando un Desarrollador Frontend React apasionado para unirse a nuestro equipo de desarrollo. Serás responsable de crear interfaces de usuario atractivas y funcionales utilizando las últimas tecnologías web.
-      Responsabilidades
-  
-          Desarrollar componentes React reutilizables y mantenibles
-          Colaborar con el equipo de diseño para implementar interfaces de usuario
-          Optimizar aplicaciones para máxima velocidad y escalabilidad
-          Participar en revisiones de código y mantener estándares de calidad
-          Trabajar en metodologías ágiles con el equipo de desarrollo
-  
-      Requisitos
-  
-          3+ años de experiencia en desarrollo frontend
-          Experiencia sólida con React y JavaScript ES6+
-          Conocimiento de HTML5, CSS3 y preprocesadores CSS
-          Experiencia con herramientas de build (Webpack, Vite)
-          Conocimiento de Git y metodologías de desarrollo colaborativo
-  
-      Beneficios
-  
-          Salario competitivo y revisiones anuales
-          Trabajo remoto flexible
-          Seguro médico privado
-          Presupuesto para formación y conferencias
-          Ambiente de trabajo colaborativo y dinámico
-        </pre>
+
+        <div class="flex flex-col gap-4">
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-slate-700">
+              Sobre la empresa
+            </h3>
+            <pre class="font-sans whitespace-pre-wrap text-slate-600">{{
+              jobData?.about_company
+            }}</pre>
+          </div>
+
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-slate-700">
+              Responsabilidades
+            </h3>
+            <pre class="font-sans whitespace-pre-wrap text-slate-600">{{
+              jobData?.responsabilities
+            }}</pre>
+          </div>
+
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-slate-700">Requisitos</h3>
+            <pre class="font-sans whitespace-pre-wrap text-slate-600">{{
+              jobData?.requirements
+            }}</pre>
+          </div>
+
+          <div>
+            <h3 class="mb-2 text-lg font-bold text-slate-700">Ofrecemos</h3>
+            <pre class="font-sans whitespace-pre-wrap text-slate-600">{{
+              jobData?.responsabilities
+            }}</pre>
+          </div>
+        </div>
       </section>
     </SectionGroup>
   </ScreenLayout>

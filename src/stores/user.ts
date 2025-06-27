@@ -5,7 +5,7 @@ interface dataInterface {
   id: string;
   username: string;
   email: string;
-  "account-type": string;
+  account_type: string;
 }
 
 export const useUserStore = defineStore("user", () => {

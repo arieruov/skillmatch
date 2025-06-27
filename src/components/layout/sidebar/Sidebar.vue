@@ -5,7 +5,7 @@ import SidebarButton from "./SidebarButton.vue";
 import UserConfigButton from "./UserConfigButton.vue";
 
 const userStore = useUserStore();
-const accountType = computed(() => userStore.userData?.["account-type"] ?? "");
+const accountType = computed(() => userStore.userData?.account_type ?? "");
 const username = computed(() => userStore.userData?.username ?? "");
 const email = computed(() => userStore.userData?.email ?? "");
 </script>

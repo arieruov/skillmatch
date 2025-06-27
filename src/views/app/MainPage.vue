@@ -1,7 +1,46 @@
 <script setup lang="ts">
+import { onMounted } from "vue";
+import { useRouter } from "vue-router";
+import { useUserStore } from "@/stores/user";
+import { useJobsStore } from "@/stores/jobs";
 import ScreenLayout from "@/components/layout/ScreenLayout.vue";
 import SectionGroup from "@/components/layout/SectionGroup.vue";
 import JobCard from "@/components/common/JobCard.vue";
+
+const token = localStorage.getItem("token");
+const router = useRouter();
+const userStore = useUserStore();
+const jobsStore = useJobsStore();
+
+onMounted(async () => {
+  try {
+    const response = await fetch("http://localhost:3000/api/job/getAllOffers", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(data.error || "/app: Error al traer las ofertas");
+      // @ts-ignore
+      error.validToken = data.validToken;
+      throw error;
+    }
+
+    jobsStore.setJobs(data);
+  } catch (error: any) {
+    if (error.validToken === false) {
+      alert("/publish-offer: Token Invalido");
+      localStorage.removeItem("token");
+      userStore.cleanUser();
+      router.push("/");
+    }
+
+    alert(error.message);
+  }
+});
 </script>
 
 <template>
@@ -12,27 +51,21 @@ import JobCard from "@/components/common/JobCard.vue";
         Explora todas las oportunidades disponibles
       </p>
     </div>
-    <SectionGroup>
+
+    <SectionGroup
+      v-if="Array.isArray(jobsStore.jobsData) && jobsStore.jobsData.length > 0"
+    >
       <JobCard
-        name="Empleo"
-        company="Compañia"
-        location="Gyadalajara, Jalisco, Mexico"
-        date="01/01/2025"
-        salary="15,000 MXN"
-        shift="Tiempo completo"
-        modality="Remoto"
-        experience="Sin experiencia"
-        description="Descripcion de la oferta"
-        :skills="[
-          'Excel',
-          'Python',
-          'Marketing Digital',
-          'Diseño Gráfico',
-          'SQL',
-          'React',
-          'Ventas',
-          'Contabilidad',
-        ]"
+        :id="jobsStore.jobsData[0].id"
+        :jobTitle="jobsStore.jobsData[0].job_title"
+        :company="jobsStore.jobsData[0].company"
+        :location="jobsStore.jobsData[0].location"
+        :salary="jobsStore.jobsData[0].salary"
+        :jobType="jobsStore.jobsData[0].job_type"
+        :workMode="jobsStore.jobsData[0].work_mode"
+        :experience="jobsStore.jobsData[0].experience"
+        :description="jobsStore.jobsData[0].description"
+        :skills="jobsStore.jobsData[0].skills"
       />
     </SectionGroup>
   </ScreenLayout>
