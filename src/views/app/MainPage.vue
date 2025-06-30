@@ -56,16 +56,18 @@ onMounted(async () => {
       v-if="Array.isArray(jobsStore.jobsData) && jobsStore.jobsData.length > 0"
     >
       <JobCard
-        :id="jobsStore.jobsData[0].id"
-        :jobTitle="jobsStore.jobsData[0].job_title"
-        :company="jobsStore.jobsData[0].company"
-        :location="jobsStore.jobsData[0].location"
-        :salary="jobsStore.jobsData[0].salary"
-        :jobType="jobsStore.jobsData[0].job_type"
-        :workMode="jobsStore.jobsData[0].work_mode"
-        :experience="jobsStore.jobsData[0].experience"
-        :description="jobsStore.jobsData[0].description"
-        :skills="jobsStore.jobsData[0].skills"
+        v-for="job in jobsStore.jobsData"
+        :key="job.id"
+        :id="job.id"
+        :jobTitle="job.job_title"
+        :company="job.company"
+        :location="job.location"
+        :salary="job.salary"
+        :jobType="job.job_type"
+        :workMode="job.work_mode"
+        :experience="job.experience"
+        :description="job.description"
+        :skills="job.skills"
       />
     </SectionGroup>
   </ScreenLayout>

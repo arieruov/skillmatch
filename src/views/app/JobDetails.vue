@@ -47,8 +47,43 @@ const skills = computed(() =>
     : [],
 );
 
-function toggleFavorite() {
-  favorite.value = !favorite.value;
+async function saveOffer() {
+  try {
+    const response = await fetch("http://localhost:3000/api/job/saveOffer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        offerId: jobId,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const error = new Error(
+        data.error || "/job-details: Error al guardar la oferta",
+      );
+
+      // @ts-ignore
+      error.validToken = data.validToken;
+      throw error;
+    }
+
+    console.log(data.message);
+    favorite.value = data.isSaved;
+  } catch (error: any) {
+    if (error.validToken === false) {
+      alert("/publish-offer: Token Invalido");
+      localStorage.removeItem("token");
+      userStore.cleanUser();
+      router.push("/");
+    }
+
+    alert(error.message);
+  }
 }
 
 onMounted(async () => {
@@ -77,6 +112,7 @@ onMounted(async () => {
     }
 
     jobData.value = data;
+    favorite.value = data.isSaved;
   } catch (error: any) {
     if (error.validToken === false) {
       alert("/publish-offer: Token Invalido");
@@ -135,7 +171,7 @@ onMounted(async () => {
           <div class="flex items-start gap-4">
             <button
               class="group flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 font-semibold text-slate-700 shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-slate-100 focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:outline-none"
-              @click="toggleFavorite"
+              @click="saveOffer"
             >
               <Heart
                 class="h-4 w-4 transition group-hover:scale-110"
@@ -175,7 +211,7 @@ onMounted(async () => {
         </div>
       </section>
 
-      <!--  -->
+      <!-- Job Information -->
       <section
         class="relative flex flex-col rounded-lg border border-slate-300 bg-slate-50 p-6 shadow-sm transition"
       >
