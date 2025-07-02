@@ -5,6 +5,7 @@ import { useRouter } from "vue-router";
 const props = defineProps<{
   username: string;
   email: string;
+  isActive: boolean;
 }>();
 const router = useRouter();
 
@@ -16,6 +17,7 @@ function goToUserConfig() {
 <template>
   <button
     class="group flex w-full items-center gap-4 rounded-md px-4 py-3 transition-all duration-150 hover:cursor-pointer hover:bg-slate-200 hover:shadow focus:shadow focus:ring-2 focus:ring-violet-300 focus:outline-none"
+    :class="props.isActive ? 'border-2 border-violet-500 shadow-md' : ''"
     @click="goToUserConfig"
   >
     <div

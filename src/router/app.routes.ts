@@ -34,6 +34,17 @@ const appRoutes = [
         name: "publish-offer",
         component: () => import("@/views/app/PublishOffer.vue"),
       },
+      {
+        path: "edit-offer",
+        name: "edit-offer",
+        component: () => import("@/views/app/EditOffer.vue"),
+      },
+      {
+        path: "edit-offer-info/:id",
+        name: "edit-offer-info",
+        component: () => import("@/views/app/EditOfferInfo.vue"),
+        props: true,
+      },
     ],
   },
 ];
