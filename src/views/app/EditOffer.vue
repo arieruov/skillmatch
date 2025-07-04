@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "@/stores/user";
-import { useJobsStore } from "@/stores/jobs";
+import { usePublishedJobsStore } from "@/stores/publishedJobs";
 import ScreenLayout from "@/components/layout/ScreenLayout.vue";
 import SectionGroup from "@/components/layout/SectionGroup.vue";
 import EditJobCard from "@/components/edit_offer/EditJobCard.vue";
@@ -10,16 +10,18 @@ import EditJobCard from "@/components/edit_offer/EditJobCard.vue";
 const token = localStorage.getItem("token");
 const router = useRouter();
 const userStore = useUserStore();
-const jobsStore = useJobsStore();
+const publishedJobsStore = usePublishedJobsStore();
 
 onMounted(async () => {
-  // Crear un endpoint en el backend para traer solo las ofertas publicadas por el usuario en especifico
-  /*   try {
-    const response = await fetch("http://localhost:3000/api/job/getAllOffers", {
-      headers: {
-        Authorization: `Bearer ${token}`,
+  try {
+    const response = await fetch(
+      "http://localhost:3000/api/job/getOffersPublishedByUser",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
 
     const data = await response.json();
 
@@ -30,7 +32,7 @@ onMounted(async () => {
       throw error;
     }
 
-    jobsStore.setJobs(data);
+    publishedJobsStore.setJobs(data);
   } catch (error: any) {
     if (error.validToken === false) {
       alert("/publish-offer: Token Invalido");
@@ -40,7 +42,7 @@ onMounted(async () => {
     }
 
     alert(error.message);
-  } */
+  }
 });
 </script>
 
@@ -52,10 +54,13 @@ onMounted(async () => {
     </div>
 
     <SectionGroup
-      v-if="Array.isArray(jobsStore.jobsData) && jobsStore.jobsData.length > 0"
+      v-if="
+        Array.isArray(publishedJobsStore.PublishedJobsData) &&
+        publishedJobsStore.PublishedJobsData.length > 0
+      "
     >
       <EditJobCard
-        v-for="job in jobsStore.jobsData"
+        v-for="job in publishedJobsStore.PublishedJobsData"
         :key="job.id"
         :id="job.id"
         :jobTitle="job.job_title"
