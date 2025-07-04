@@ -12,14 +12,15 @@ interface dataInterface {
   experience: string;
   description: string;
   skills: string;
+  similarity: number;
 }
 
-export const usePublishedJobsStore = defineStore("publishedJobs", () => {
-  const PublishedJobsData = ref<dataInterface[] | null>(null);
+export const useMatchJobsStore = defineStore("matchJobs", () => {
+  const matchJobsData = ref<dataInterface[] | null>(null);
 
   function setJobs(data: dataInterface[]) {
-    PublishedJobsData.value = data;
+    matchJobsData.value = data;
   }
 
-  return { PublishedJobsData, setJobs };
+  return { matchJobsData, setJobs };
 });
