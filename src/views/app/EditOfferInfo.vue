@@ -50,6 +50,11 @@ async function publishOffer() {
     return;
   }
 
+  const confirmed = window.confirm(
+    "¿Estás seguro de que deseas modificar esta oferta?\n",
+  );
+  if (!confirmed) return;
+
   try {
     const response = await fetch("http://localhost:3000/api/job/editOffer", {
       method: "POST",
@@ -102,6 +107,11 @@ async function publishOffer() {
 }
 
 async function deleteOffer() {
+  const confirmed = window.confirm(
+    "¿Estás seguro de que deseas eliminar esta oferta?\n",
+  );
+  if (!confirmed) return;
+
   try {
     const response = await fetch("http://localhost:3000/api/job/deleteOffer", {
       method: "POST",

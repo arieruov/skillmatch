@@ -47,6 +47,11 @@ async function publishOffer() {
     return;
   }
 
+  const confirmed = window.confirm(
+    "¿Estás seguro de que deseas publicar esta oferta?\n",
+  );
+  if (!confirmed) return;
+
   try {
     const response = await fetch("http://localhost:3000/api/job/publishOffer", {
       method: "POST",
@@ -207,8 +212,8 @@ async function publishOffer() {
                   v-model="jobType"
                 >
                   <option value="" selected>Seleccionar tipo de empleo</option>
-                  <option value="Tiempo completo">Tiempo Completo</option>
-                  <option value="Medio tiempo">Medio Tiempo</option>
+                  <option value="Tiempo Completo">Tiempo Completo</option>
+                  <option value="Medio Tiempo">Medio Tiempo</option>
                   <option value="Contrato">Contrato</option>
                   <option value="Practicas">Prácticas</option>
                   <option value="Freelance">Freelance</option>

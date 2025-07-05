@@ -24,6 +24,11 @@ async function updateProfile() {
     return;
   }
 
+  const confirmed = window.confirm(
+    "¿Deseas continuar con la actualización de la información tu cuenta?\n ",
+  );
+  if (!confirmed) return;
+
   try {
     const response = await fetch(
       "http://localhost:3000/api/user/updateUserData",
