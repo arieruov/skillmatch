@@ -48,8 +48,9 @@ async function publishOffer() {
   }
 
   const confirmed = window.confirm(
-    "¿Estás seguro de que deseas publicar esta oferta?\n",
+    "¿Estás seguro de que deseas publicar esta oferta?\n ",
   );
+
   if (!confirmed) return;
 
   try {
@@ -80,29 +81,23 @@ async function publishOffer() {
     const data = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        data.error || "/publish-offer: Error al publicar la oferta",
-      );
+      if (data.validToken === false) {
+        alert(
+          "Hubo un error con la sesion actual, ingresa nuevamente para continuar",
+        );
 
-      // @ts-ignore
-      error.validToken = data.validToken;
+        localStorage.removeItem("token");
+        userStore.cleanUser();
+        router.push("/");
+      }
 
-      throw error;
+      throw new Error(data.error || "Error al intentar publicar la oferta");
     }
 
-    alert("/publish-offer: Oferta publicada exitosamente.");
-  } catch (error: any) {
-    if (error.validToken === false) {
-      alert("/publish-offer: Token Invalido");
-
-      localStorage.removeItem("token");
-
-      userStore.cleanUser();
-
-      router.push("/");
-    }
-
-    alert(error.message);
+    alert("Oferta publicada exitosamente.");
+    router.push("/app");
+  } catch (error) {
+    alert(error);
   }
 }
 </script>
@@ -388,7 +383,7 @@ async function publishOffer() {
       </SectionElement>
     </SectionGroup>
 
-    <div class="mt-4">
+    <div class="mt-4 mb-32">
       <button
         class="flex items-center justify-center rounded-md bg-violet-600 px-4 py-2 font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:outline-none"
         @click="publishOffer"

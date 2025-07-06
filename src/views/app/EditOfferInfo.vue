@@ -51,8 +51,9 @@ async function publishOffer() {
   }
 
   const confirmed = window.confirm(
-    "¿Estás seguro de que deseas modificar esta oferta?\n",
+    "¿Estás seguro de que deseas modificar esta oferta?\n ",
   );
+
   if (!confirmed) return;
 
   try {
@@ -84,32 +85,33 @@ async function publishOffer() {
     const data = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        data.error || "/edit-offer-info: Error al publicar la oferta",
+      if (data.validToken === false) {
+        alert(
+          "Hubo un error con la sesion actual, ingresa nuevamente para continuar",
+        );
+
+        localStorage.removeItem("token");
+        userStore.cleanUser();
+        router.push("/");
+      }
+
+      throw new Error(
+        data.error || "Error al intentar modificar la oferta actual",
       );
-
-      // @ts-ignore
-      error.validToken = data.validToken;
-      throw error;
     }
 
-    alert("/edit-offer-info: Oferta editada exitosamente.");
-  } catch (error: any) {
-    if (error.validToken === false) {
-      alert("/edit-offer-info: Token Invalido");
-      localStorage.removeItem("token");
-      userStore.cleanUser();
-      router.push("/");
-    }
-
-    alert(error.message);
+    alert("Oferta modificada exitosamente.");
+    router.push("/app");
+  } catch (error) {
+    alert(error);
   }
 }
 
 async function deleteOffer() {
   const confirmed = window.confirm(
-    "¿Estás seguro de que deseas eliminar esta oferta?\n",
+    "¿Estás seguro de que deseas eliminar esta oferta?\n ",
   );
+
   if (!confirmed) return;
 
   try {
@@ -127,25 +129,24 @@ async function deleteOffer() {
     const data = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        data.error || "/edit-offer-info: Error al eliminar la oferta",
+      if (data.validToken === false) {
+        alert(
+          "Hubo un error con la sesion actual, ingresa nuevamente para continuar",
+        );
+
+        localStorage.removeItem("token");
+        userStore.cleanUser();
+        router.push("/");
+      }
+
+      throw new Error(
+        data.error || "Error al intentar eliminar la oferta actual",
       );
-
-      // @ts-ignore
-      error.validToken = data.validToken;
-      throw error;
     }
 
-    alert("/edit-offer-info: Oferta eliminada exitosamente.");
-  } catch (error: any) {
-    if (error.validToken === false) {
-      alert("/edit-offer-info: Token Invalido");
-      localStorage.removeItem("token");
-      userStore.cleanUser();
-      router.push("/");
-    }
-
-    alert(error.message);
+    alert("Oferta eliminada exitosamente.");
+  } catch (error) {
+    alert(error);
   }
 }
 
@@ -165,13 +166,20 @@ onMounted(async () => {
     const data = await response.json();
 
     if (!response.ok) {
-      const error = new Error(
-        data.error || "/job-details: Error al publicar la oferta",
-      );
+      if (data.validToken === false) {
+        alert(
+          "Hubo un error con la sesion actual, ingresa nuevamente para continuar",
+        );
 
-      // @ts-ignore
-      error.validToken = data.validToken;
-      throw error;
+        localStorage.removeItem("token");
+        userStore.cleanUser();
+        router.push("/");
+      }
+
+      throw new Error(
+        data.error ||
+          "Error al intentar obtener las oferta de la base de datos",
+      );
     }
 
     jobTitle.value = data.job_title;
@@ -188,17 +196,8 @@ onMounted(async () => {
     responsabilities.value = data.responsabilities;
     requirements.value = data.requirements;
     weOffer.value = data.we_offer;
-
-    console.log(jobType.value);
-  } catch (error: any) {
-    if (error.validToken === false) {
-      alert("/publish-offer: Token Invalido");
-      localStorage.removeItem("token");
-      userStore.cleanUser();
-      router.push("/");
-    }
-
-    alert(error.message);
+  } catch (error) {
+    alert(error);
   }
 });
 </script>
@@ -485,7 +484,7 @@ onMounted(async () => {
       </SectionElement>
     </SectionGroup>
 
-    <div class="mt-4 flex justify-between">
+    <div class="mt-4 mb-32 flex justify-between">
       <button
         class="flex items-center justify-center rounded-md bg-violet-600 px-4 py-2 font-semibold text-white shadow-sm transition-colors duration-200 hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:ring-offset-2 focus:outline-none"
         @click="publishOffer"
