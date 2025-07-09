@@ -62,7 +62,7 @@ function goToJob() {
       </p>
     </div>
 
-    <div class="flex max-w-5xl flex-col gap-4">
+    <div class="flex max-w-4xl flex-col gap-4">
       <p class="text-sm whitespace-pre-line text-slate-500">
         {{ props.description }}
       </p>

@@ -66,7 +66,7 @@ async function getMatchOffers() {
       </p>
     </div>
 
-    <div class="mb-8">
+    <form class="mb-8" @submit.prevent="getMatchOffers">
       <div
         class="flex gap-4 rounded-lg border border-slate-300 bg-slate-50 p-2 shadow-sm transition hover:shadow-lg"
       >
@@ -83,12 +83,12 @@ async function getMatchOffers() {
         </div>
         <button
           class="flex items-center justify-center rounded-lg bg-violet-600 px-5 py-3 font-semibold text-white shadow transition hover:cursor-pointer hover:bg-violet-700 focus:ring-2 focus:ring-violet-400 focus:outline-none active:bg-violet-800"
-          @click="getMatchOffers"
+          type="submit"
         >
           Buscar
         </button>
       </div>
-    </div>
+    </form>
 
     <SectionGroup
       v-if="
