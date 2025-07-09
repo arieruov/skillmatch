@@ -57,7 +57,7 @@ async function publishOffer() {
   if (!confirmed) return;
 
   try {
-    const response = await fetch("http://localhost:3000/api/job/editOffer", {
+    const response = await fetch("https://skillmatch-api.onrender.com/api/job/editOffer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -115,7 +115,7 @@ async function deleteOffer() {
   if (!confirmed) return;
 
   try {
-    const response = await fetch("http://localhost:3000/api/job/deleteOffer", {
+    const response = await fetch("https://skillmatch-api.onrender.com/api/job/deleteOffer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -152,7 +152,7 @@ async function deleteOffer() {
 
 onMounted(async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/job/getOffer", {
+    const response = await fetch("https://skillmatch-api.onrender.com/api/job/getOffer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

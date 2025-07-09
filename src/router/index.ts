@@ -31,7 +31,7 @@ router.beforeEach(async (to, from, next) => {
   */
   if (isProtected && token && userStore.userData === null) {
     try {
-      const response = await fetch("http://localhost:3000/api/user/getUserData", {
+      const response = await fetch("https://skillmatch-api.onrender.com/api/user/getUserData", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

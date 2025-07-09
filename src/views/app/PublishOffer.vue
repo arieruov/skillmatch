@@ -54,7 +54,7 @@ async function publishOffer() {
   if (!confirmed) return;
 
   try {
-    const response = await fetch("http://localhost:3000/api/job/publishOffer", {
+    const response = await fetch("https://skillmatch-api.onrender.com/api/job/publishOffer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

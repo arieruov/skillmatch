@@ -15,7 +15,7 @@ const publishedJobsStore = usePublishedJobsStore();
 onMounted(async () => {
   try {
     const response = await fetch(
-      "http://localhost:3000/api/job/getOffersPublishedByUser",
+      "https://skillmatch-api.onrender.com/api/job/getOffersPublishedByUser",
       {
         headers: {
           Authorization: `Bearer ${token}`,

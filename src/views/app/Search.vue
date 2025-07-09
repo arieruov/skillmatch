@@ -21,7 +21,7 @@ async function getMatchOffers() {
   }
 
   try {
-    const response = await fetch("http://localhost:3000/api/job/matchJobs", {
+    const response = await fetch("https://skillmatch-api.onrender.com/api/job/matchJobs", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,

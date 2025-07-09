@@ -49,7 +49,7 @@ const skills = computed(() =>
 
 async function saveOffer() {
   try {
-    const response = await fetch("http://localhost:3000/api/job/saveOffer", {
+    const response = await fetch("https://skillmatch-api.onrender.com/api/job/saveOffer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ async function saveOffer() {
 
 onMounted(async () => {
   try {
-    const response = await fetch("http://localhost:3000/api/job/getOffer", {
+    const response = await fetch("https://skillmatch-api.onrender.com/api/job/getOffer", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

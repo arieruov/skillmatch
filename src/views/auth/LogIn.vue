@@ -19,7 +19,7 @@ const password = ref("");
 const router = useRouter();
 
 async function logIn() {
-  const apiUrl = "http://localhost:3000/api/auth/login";
+  const apiUrl = "https://skillmatch-api.onrender.com/api/auth/login";
 
   if (!email.value || !password.value) {
     alert("Por favor completa todos los campos.");
