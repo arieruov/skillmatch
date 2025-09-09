@@ -21,14 +21,17 @@ async function getMatchOffers() {
   }
 
   try {
-    const response = await fetch("https://skillmatch-api.onrender.com/api/job/matchJobs", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/job/matchJobs`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ skills: skills.value }),
       },
-      body: JSON.stringify({ skills: skills.value }),
-    });
+    );
 
     const data = await response.json();
 

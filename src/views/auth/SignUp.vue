@@ -24,7 +24,7 @@ const accountType = ref("user");
 const router = useRouter();
 
 async function createUser() {
-  const apiUrl = "https://skillmatch-api.onrender.com/api/auth/register";
+  const apiUrl = `${import.meta.env.VITE_API_URL}/api/auth/register`;
 
   if (
     !username.value ||

@@ -54,29 +54,32 @@ async function publishOffer() {
   if (!confirmed) return;
 
   try {
-    const response = await fetch("https://skillmatch-api.onrender.com/api/job/publishOffer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/job/publishOffer`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          jobTitle: jobTitle.value,
+          company: company.value,
+          location: location.value,
+          applicationUrl: applicationUrl.value,
+          jobType: jobType.value,
+          experience: experience.value,
+          workMode: workMode.value,
+          salary: salary.value,
+          skills: skillInput.value,
+          description: description.value,
+          aboutCompany: aboutCompany.value,
+          responsabilities: responsabilities.value,
+          requirements: requirements.value,
+          weOffer: weOffer.value,
+        }),
       },
-      body: JSON.stringify({
-        jobTitle: jobTitle.value,
-        company: company.value,
-        location: location.value,
-        applicationUrl: applicationUrl.value,
-        jobType: jobType.value,
-        experience: experience.value,
-        workMode: workMode.value,
-        salary: salary.value,
-        skills: skillInput.value,
-        description: description.value,
-        aboutCompany: aboutCompany.value,
-        responsabilities: responsabilities.value,
-        requirements: requirements.value,
-        weOffer: weOffer.value,
-      }),
-    });
+    );
 
     const data = await response.json();
 

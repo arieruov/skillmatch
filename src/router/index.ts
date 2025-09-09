@@ -31,11 +31,14 @@ router.beforeEach(async (to, from, next) => {
   */
   if (isProtected && token && userStore.userData === null) {
     try {
-      const response = await fetch("https://skillmatch-api.onrender.com/api/user/getUserData", {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/user/getUserData`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
       const data = await response.json();
 

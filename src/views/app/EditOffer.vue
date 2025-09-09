@@ -15,7 +15,7 @@ const publishedJobsStore = usePublishedJobsStore();
 onMounted(async () => {
   try {
     const response = await fetch(
-      "https://skillmatch-api.onrender.com/api/job/getOffersPublishedByUser",
+      `${import.meta.env.VITE_API_URL}/api/job/getOffersPublishedByUser`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

@@ -31,7 +31,7 @@ async function updateProfile() {
 
   try {
     const response = await fetch(
-      "https://skillmatch-api.onrender.com/api/user/updateUserData",
+      `${import.meta.env.VITE_API_URL}/api/user/updateUserData`,
       {
         method: "POST",
         headers: {
@@ -80,13 +80,16 @@ async function deleteUser() {
   if (!confirmed) return;
 
   try {
-    const response = await fetch("https://skillmatch-api.onrender.com/api/user/deleteUser", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/user/deleteUser`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
       },
-    });
+    );
 
     const data = await response.json();
 

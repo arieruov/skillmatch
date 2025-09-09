@@ -49,16 +49,19 @@ const skills = computed(() =>
 
 async function saveOffer() {
   try {
-    const response = await fetch("https://skillmatch-api.onrender.com/api/job/saveOffer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/job/saveOffer`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          offerId: jobId,
+        }),
       },
-      body: JSON.stringify({
-        offerId: jobId,
-      }),
-    });
+    );
 
     const data = await response.json();
 
@@ -88,16 +91,19 @@ async function saveOffer() {
 
 onMounted(async () => {
   try {
-    const response = await fetch("https://skillmatch-api.onrender.com/api/job/getOffer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/api/job/getOffer`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          offerId: jobId,
+        }),
       },
-      body: JSON.stringify({
-        offerId: jobId,
-      }),
-    });
+    );
 
     const data = await response.json();
 
